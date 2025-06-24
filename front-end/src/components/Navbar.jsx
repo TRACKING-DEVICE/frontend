@@ -14,8 +14,8 @@ const Navbar = () => {
         { name: 'Overview', path: '/' },
     ];
 
-    const [isScrolled, setIsScrolled] = React.useState(false);
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+const [isScrolled, setIsScrolled] = React.useState(false);
+const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -65,15 +65,15 @@ const Navbar = () => {
                         <img src={close} alt="closeicon" className="h-6"/>
                     </button>
 
-                    {navLinks.map((link, i) => (
-                        <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
-                            {link.name}
-                        </a>
-                    ))}
+                {navLinks.map((link, i) => (
+                    <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
+                        {link.name}
+                    </a>
+                ))}
 
-                    <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
-                        New Launch
-                    </button>
+                <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
+                    New Launch
+                </button>
 
                     <button className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
 
@@ -84,9 +84,5 @@ const Navbar = () => {
     );
 }
 export default Navbar
-
-// components/Navbar.jsx
-
-
 
 
