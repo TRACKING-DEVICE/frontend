@@ -17,19 +17,9 @@ const App = () => {
 
   return (
     <div>
-      {/* Conditionally render Navbar unless it's an Owner route */}
-      {!isOwnerPath && <Navbar />}
-
-      {/* Show Login button or status */}
-      {!isAuthenticated ? (
-        <button
-          onClick={openLogin}
-          className="fixed top-24 left-4 bg-black text-white px-4 py-2 rounded"
-        >
-          Login
-        </button>
-      ) : (
-        <p className="fixed top-24 left-4 text-green-600">✅ Logged In</p>
+      {/* Navbar with login button inside */}
+      {!isOwnerPath && (
+        <Navbar onLoginClick={openLogin} isAuthenticated={isAuthenticated} />
       )}
 
       {/* Login Modal */}
@@ -41,3 +31,13 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+
