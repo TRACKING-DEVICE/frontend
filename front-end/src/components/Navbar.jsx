@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../src/assets/logo.png"
+import search from "../../src/assets/searchIcon.svg"
 
 
 const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Income', path: '/' },
-        { name: 'Contact', path: '/' },
-        { name: 'About', path: '/' },
+        { name: 'Expenses', path: '/' },
+        { name: 'Overview', path: '/' },
     ];
 
     const [isScrolled, setIsScrolled] = React.useState(false);
@@ -45,7 +46,7 @@ const Navbar = () => {
 
                 {/* Desktop Right */}
                 <div className="hidden md:flex items-center gap-4">
-                    <img src="" alt="search-icon"/>
+                    <img src={search} alt="search-icon"/>
                     <button className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
                         Login
                     </button>
