@@ -1,34 +1,34 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../../src/assets/logo.png"
+
+
 const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
-        { name: 'Products', path: '/' },
+        { name: 'Income', path: '/' },
         { name: 'Contact', path: '/' },
         { name: 'About', path: '/' },
     ];
-
-    const ref = React.useRef(null)
 
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     React.useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(ref.current.scrollTop > 10);
+            setIsScrolled(window.scrollY > 10);
         };
-        ref.current.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     return (
-        <div ref={ref} className="h-88 md:h-64 overflow-y-scroll">
-            <p className="w-10 h-[500px]"></p>
             <nav className={`fixed top-0 left-0 bg-indigo-500 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${isScrolled ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"}`}>
 
                 {/* Logo */}
-                <a href="/" className="flex items-center gap-2">
-                    <img src={"https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/dummyLogo/dummyLogoWhite.svg"} alt="logo" className={`h-9 ${isScrolled && "invert opacity-80"}`} />
-                </a>
+                <Link to = '/'>
+                    <img src={logo} alt="logo" className={`h-22 max-w-[300px] ${isScrolled ? "invert opacity-100" : ""}`}/>
+                </Link>
 
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-4 lg:gap-8">
@@ -39,16 +39,13 @@ const Navbar = () => {
                         </a>
                     ))}
                     <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`}>
-                        New Launch
+                        Dashboard
                     </button>
                 </div>
 
                 {/* Desktop Right */}
                 <div className="hidden md:flex items-center gap-4">
-                    <svg className={`h-6 w-6 ${isScrolled ? "invert" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    </svg>
+                    <img src="" alt="search-icon"/>
                     <button className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
                         Login
                     </button>
@@ -87,7 +84,6 @@ const Navbar = () => {
                     </button>
                 </div>
             </nav>
-        </div>
     );
 }
 export default Navbar
