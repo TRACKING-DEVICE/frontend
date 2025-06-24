@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -19,34 +17,20 @@ const App = () => {
 
   return (
     <div>
-      {/* Conditionally render Navbar unless it's an Owner route */}
-      {!isOwnerPath && <Navbar />}
+      {/* Navbar with login button inside */}
+      {!isOwnerPath && (
+        <Navbar onLoginClick={openLogin} isAuthenticated={isAuthenticated} />
+      )}
 
-  {/* Show Login button or status */}
-  {!isAuthenticated ? (
-    <button
-      onClick={openLogin}
-      className="fixed top-24 left-4 bg-black text-white px-4 py-2 rounded"
-    >
-      Login
-    </button>
-  ) : (
-    <p className="fixed top-24 left-4 text-green-600">✅ Logged In</p>
-  )}
-
-  {/* Login Modal */}
-  {showLogin && (
-    <LoginModal onClose={closeLogin} onLogin={handleLoginSuccess} />
-  )}
-</div>
+      {/* Login Modal */}
+      {showLogin && (
+        <LoginModal onClose={closeLogin} onLogin={handleLoginSuccess} />
+      )}
+    </div>
   );
 };
 
 export default App;
-
-
-
-
 
 
 

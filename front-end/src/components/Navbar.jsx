@@ -5,7 +5,7 @@ import search from "../../src/assets/searchIcon.svg";
 import menu from "../../src/assets/menuIcon.svg";
 import close from "../../src/assets/closeIcon.svg";
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick }) => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Income", path: "/" },
@@ -71,7 +71,10 @@ const Navbar = () => {
       {/* Desktop Right */}
       <div className="hidden md:flex items-center gap-4">
         <img src={search} alt="search-icon" />
-        <button className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
+        <button
+          onClick={onLoginClick}
+          className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500"
+        >
           Login
         </button>
       </div>
@@ -98,12 +101,18 @@ const Navbar = () => {
           <img src={close} alt="close-icon" className="h-6" />
         </button>
 
+        {navLinks.map((link, i) => (
+          <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
+            {link.name}
+          </a>
+        ))}
+
         <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
           New Launch
         </button>
 
         <button
-          onClick={() => console.log("Login clicked")}
+          onClick={onLoginClick}
           className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500"
         >
           Login
@@ -114,4 +123,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
