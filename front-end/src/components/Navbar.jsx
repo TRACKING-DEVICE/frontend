@@ -75,7 +75,8 @@ const Navbar = () => {
                         New Launch
                     </button>
 
-                    <button onClick ="" className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
+                    <button className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
+
                         Login
                     </button>
                 </div>
