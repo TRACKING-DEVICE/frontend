@@ -1,20 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../src/assets/logo.png";
-import search from "../../src/assets/searchIcon.svg";
-import menu from "../../src/assets/menuIcon.svg";
-import close from "../../src/assets/closeIcon.svg";
+import logo from "../../src/assets/logo.png"
+import search from "../../src/assets/searchIcon.svg"
+import menu from "../../src/assets/menuIcon.svg"
+import close from "../../src/assets/closeIcon.svg"
 
-const Navbar = ({ onLoginClick }) => {
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Income", path: "/" },
-    { name: "Expenses", path: "/" },
-    { name: "Overview", path: "/" },
-  ];
 
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+const Navbar = () => {
+    const navLinks = [
+        { name: 'Home', path: '/' },
+        { name: 'Income', path: '/' },
+        { name: 'Expenses', path: '/' },
+        { name: 'Overview', path: '/' },
+    ];
+
+    const [isScrolled, setIsScrolled] = React.useState(false);
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -24,22 +25,13 @@ const Navbar = ({ onLoginClick }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <nav
-      className={`fixed top-0 left-0 bg-indigo-500 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${
-        isScrolled
-          ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
-          : "py-4 md:py-6"
-      }`}
-    >
-      {/* Logo */}
-      <Link to="/">
-        <img
-          src={logo}
-          alt="logo"
-          className={`h-20 max-w-[300px] ${isScrolled ? "invert opacity-100" : ""}`}
-        />
-      </Link>
+    return (
+            <nav className={`fixed top-0 left-0 bg-indigo-500 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${isScrolled ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"}`}>
+
+                {/* Logo */}
+                <Link to = '/'>
+                    <img src={logo} alt="logo" className={`h-22 max-w-[300px] ${isScrolled ? "invert opacity-100" : ""}`}/>
+                </Link>
 
       {/* Desktop Nav */}
       <div className="hidden md:flex items-center gap-4 lg:gap-8">
@@ -68,16 +60,13 @@ const Navbar = ({ onLoginClick }) => {
         </button>
       </div>
 
-      {/* Desktop Right */}
-      <div className="hidden md:flex items-center gap-4">
-        <img src={search} alt="search-icon" />
-        <button
-          onClick={onLoginClick}
-          className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500"
-        >
-          Login
-        </button>
-      </div>
+                {/* Desktop Right */}
+                <div className="hidden md:flex items-center gap-4">
+                    <img src={search} alt="search-icon"/>
+                    <button className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
+                        Login
+                    </button>
+                </div>
 
       {/* Mobile Menu Button */}
       <div className="flex items-center gap-3 md:hidden">
@@ -101,25 +90,28 @@ const Navbar = ({ onLoginClick }) => {
           <img src={close} alt="close-icon" className="h-6" />
         </button>
 
-        {navLinks.map((link, i) => (
-          <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
-            {link.name}
-          </a>
-        ))}
+                    {navLinks.map((link, i) => (
+                        <a key={i} href={link.path} onClick={() => setIsMenuOpen(false)}>
+                            {link.name}
+                        </a>
+                    ))}
 
-        <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
-          New Launch
-        </button>
+                    <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
+                        New Launch
+                    </button>
 
-        <button
-          onClick={onLoginClick}
-          className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500"
-        >
-          Login
-        </button>
-      </div>
-    </nav>
-  );
-};
+                    <button className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
 
-export default Navbar;
+                        Login
+                    </button>
+                </div>
+            </nav>
+    );
+}
+export default Navbar
+
+// components/Navbar.jsx
+
+
+
+

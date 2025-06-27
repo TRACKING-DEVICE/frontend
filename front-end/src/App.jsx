@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import Navbar from './components/Navbar';
-import LoginModal from './components/LoginModal';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import Home from './pages/Home';
+
+
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const isOwnerPath = useLocation().pathname.includes("Owner");
 
-  const openLogin = () => setShowLogin(true);
-  const closeLogin = () => setShowLogin(false);
-  const handleLoginSuccess = () => {
-    setIsAuthenticated(true);
-    closeLogin();
-  };
+  
+  const isOwnerPath = useLocation().pathname.includes("Owner");
+  
 
   return (
     <div>
+<<<<<<< HEAD
       {/* Navbar with login button inside */}
       {!isOwnerPath && (
         <Navbar onLoginClick={openLogin} isAuthenticated={isAuthenticated} />
@@ -26,6 +23,14 @@ const App = () => {
       {showLogin && (
         <LoginModal onClose={closeLogin} onLogin={handleLoginSuccess} />
       )}
+=======
+      {!isOwnerPath && <Navbar /> }
+      <div className='min-h-[70vh]'>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+        </Routes>
+      </div>
+>>>>>>> mark-branch
     </div>
   );
 };
