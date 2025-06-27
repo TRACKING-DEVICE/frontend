@@ -13,24 +13,12 @@ const App = () => {
 
   return (
     <div>
-<<<<<<< HEAD
-      {/* Navbar with login button inside */}
-      {!isOwnerPath && (
-        <Navbar onLoginClick={openLogin} isAuthenticated={isAuthenticated} />
-      )}
-
-      {/* Login Modal */}
-      {showLogin && (
-        <LoginModal onClose={closeLogin} onLogin={handleLoginSuccess} />
-      )}
-=======
       {!isOwnerPath && <Navbar /> }
       <div className='min-h-[70vh]'>
         <Routes>
           <Route path='/' element={<Home/>}/>
         </Routes>
       </div>
->>>>>>> mark-branch
     </div>
   );
 };
