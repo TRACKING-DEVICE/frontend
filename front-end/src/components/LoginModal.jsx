@@ -1,60 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
+const mockUser = {
+  email: "admin@example.com",
+  password: "1234"
+};
 
 const LoginModal = ({ onClose, onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      alert("Both fields are required");
-      return;
-    }
-
-    // Fake login logic — replace with API call if needed
-    if (email === "user@example.com" && password === "123456") {
-      onLogin(); // Mark as logged in
+    if (email === mockUser.email && password === mockUser.password) {
+      onLogin();
     } else {
-      alert("Invalid credentials");
+      setError("Invalid email or password");
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-lg space-y-4 w-80">
-        <h2 className="text-xl font-semibold text-center">Login</h2>
-
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg w-80 shadow-lg space-y-4"
+      >
+        <h2 className="text-xl font-bold text-center">Login</h2>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <input
           type="email"
-          className="w-full border px-3 py-2 rounded"
           placeholder="Email"
+          className="w-full px-3 py-2 border rounded"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
-
         <input
           type="password"
-          className="w-full border px-3 py-2 rounded"
           placeholder="Password"
+          className="w-full px-3 py-2 border rounded"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-
-        <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 bg-gray-300 rounded"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
+        <div className="flex justify-between mt-4">
+          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
             Login
+          </button>
+          <button type="button" onClick={onClose} className="text-gray-600 px-4 py-2">
+            Cancel
           </button>
         </div>
       </form>
@@ -63,4 +57,3 @@ const LoginModal = ({ onClose, onLogin }) => {
 };
 
 export default LoginModal;
-
