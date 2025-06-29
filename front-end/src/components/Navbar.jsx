@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../src/assets/logo.png"
 import search from "../../src/assets/searchIcon.svg"
 import menu from "../../src/assets/menuIcon.svg"
-import close from "../../src/assets/closeIcon.svg"
 import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
 
 
@@ -23,21 +22,32 @@ const Navbar = () => {
         { name: 'Overview', path: '/' },
     ];
 
-const [isScrolled, setIsScrolled] = React.useState(false);
-const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+const [isScrolled, setIsScrolled] = useState(false);
+const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 const{openSignIn} = useClerk()
 const {user} = useUser()
 const navigate = useNavigate()
 const location = useLocation()
 
-    React.useEffect(() => {
+    useEffect(() => {
+        if(location.pathname !== '/'){
+            setIsScrolled(true);
+            return;
+            }
+        else{
+            setIsScrolled(false)
+        }
+        setIsScrolled(prev => location.pathname !== '/' ? true : prev);
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+        },[location.pathname]);
+
+
 
     return (
             <nav className={`fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${isScrolled ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"}`}>
@@ -55,7 +65,7 @@ const location = useLocation()
                             <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                         </a>
                     ))}
-                    <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick= {()=> navigate ('/Owner')}>
+                    <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick= {()=> navigate ('/')}>
                         Dashboard
                     </button>
                 </div>
@@ -66,7 +76,7 @@ const location = useLocation()
                                           {user ? 
                       (<UserButton>
                         <UserButton.MenuItems>
-                            <UserButton.Action label="My Income" labelIcon={<BookIcon/>} onClick={()=> navigate('/src/pages/Home.jsx')}/>
+                            <UserButton.Action label="My Income" labelIcon={<BookIcon/>} onClick={()=> navigate('/')}/>
                         </UserButton.MenuItems>
                       </UserButton>)
                       :
@@ -83,7 +93,7 @@ const location = useLocation()
                 <div className="flex items-center gap-3 md:hidden">
                 {user && <UserButton>
                         <UserButton.MenuItems>
-                            <UserButton.Action label="My Income" labelIcon={<BookIcon/>} onClick={()=> navigate('/src/pages/Home.jsx')}/>
+                            <UserButton.Action label="My Income" labelIcon={<BookIcon/>} onClick={()=> navigate('/')}/>
                         </UserButton.MenuItems>
                       </UserButton>}
                     <img onClick={()=>setIsMenuOpen(!isMenuOpen)} src={menu} alt="menu-icon" />
@@ -101,7 +111,7 @@ const location = useLocation()
                     </a>
                 ))}
 
-                {user && <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all" onClick= {()=> navigate ('/Owner')}>
+                {user && <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all" onClick= {()=> navigate ('/')}>
                     Dashboard
                 </button>}
 
