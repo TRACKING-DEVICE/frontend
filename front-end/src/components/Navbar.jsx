@@ -1,10 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../src/assets/logo.png"
 import search from "../../src/assets/searchIcon.svg"
 import menu from "../../src/assets/menuIcon.svg"
 import close from "../../src/assets/closeIcon.svg"
 import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
+
+
+const BookIcon = () => (
+    <svg className="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
+    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
+</svg>
+
+)
 
 
 const Navbar = () => {
@@ -20,6 +28,8 @@ const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
 const{openSignIn} = useClerk()
 const {user} = useUser()
+const navigate = useNavigate()
+const location = useLocation()
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -45,7 +55,7 @@ const {user} = useUser()
                             <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                         </a>
                     ))}
-                    <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`}>
+                    <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick= {()=> navigate ('/Owner')}>
                         Dashboard
                     </button>
                 </div>
@@ -53,15 +63,29 @@ const {user} = useUser()
                 {/* Desktop Right */}
                 <div className="hidden md:flex items-center gap-4">
                     <img src={search} alt="search-icon"/>
-                    <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
+                                          {user ? 
+                      (<UserButton>
+                        <UserButton.MenuItems>
+                            <UserButton.Action label="My Income" labelIcon={<BookIcon/>} onClick={()=> navigate('/src/pages/Home.jsx')}/>
+                        </UserButton.MenuItems>
+                      </UserButton>)
+                      :
+                      (                   <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
 
-                      {user }
+
                         Login
-                    </button>
+                    </button>)
+                      }
+ 
                 </div>
 
                 {/* Mobile Menu Button */}
                 <div className="flex items-center gap-3 md:hidden">
+                {user && <UserButton>
+                        <UserButton.MenuItems>
+                            <UserButton.Action label="My Income" labelIcon={<BookIcon/>} onClick={()=> navigate('/src/pages/Home.jsx')}/>
+                        </UserButton.MenuItems>
+                      </UserButton>}
                     <img onClick={()=>setIsMenuOpen(!isMenuOpen)} src={menu} alt="menu-icon" />
                 </div>
 
@@ -77,14 +101,14 @@ const {user} = useUser()
                     </a>
                 ))}
 
-                <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
-                    New Launch
-                </button>
+                {user && <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all" onClick= {()=> navigate ('/Owner')}>
+                    Dashboard
+                </button>}
 
-                    <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
+                {!user && <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
 
                         Login
-                    </button>
+                    </button>}
                 </div>
             </nav>
     );
