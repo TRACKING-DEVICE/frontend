@@ -5,8 +5,7 @@ import Home from './pages/Home';
 import Dashboard from './components/Dashboard';
 import BudgetDetail from './components/BudgetDetail';
 import ExpenseForm from './components/ExpensesForm';
-import ExpensesPage from './components/ExpensesPage';
-import ExpenseList from './components/ExpensesList';
+
 
 
 
@@ -29,10 +28,11 @@ const App = () => {
               <Route path='/' element={<Home/>}/>
               <Route path="/Dashboard" element={<Dashboard />} />
               <Route path="/budget/:id" element={<BudgetDetail />} />
-              <Route path="/expenses" element={<ExpensesPage />} />
-              <Route path='/expenselist' element={<ExpenseList />} />
+              {/* <Route path="/expenses" element={<ExpensesPage />} />
+              <Route path='/expenselist' element={<ExpenseList />} /> */}
         </Routes>
         <ExpenseForm />
+        <Dashboard />
         
       </div>
     </div>

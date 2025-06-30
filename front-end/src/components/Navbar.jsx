@@ -25,9 +25,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'BudgetDetail', path: '/budget/:id' },
-    { name: 'ExpensePage', path: '/expenses' },
     { name: 'Dashboard', path: '/Dashboard' },
-    { name: 'ExpenseList', path: '/expenselist'}
+
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,9 +70,9 @@ const Navbar = () => {
             <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
           </Link>
         ))}
-        <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick={() => navigate('/')}>
+        {/* <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick={() => navigate('/')}>
           Dashboard
-        </button>
+        </button> */}
       </div>
 
       {/* Desktop Right */}
@@ -116,11 +115,11 @@ const Navbar = () => {
           </Link>
         ))}
 
-        {user && (
+        {/* {user && (
           <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all" onClick={() => navigate('/Dashboard')}>
             Dashboard
           </button>
-        )}
+        )} */}
 
         {!user && (
           <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
