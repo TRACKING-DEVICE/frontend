@@ -1,7 +1,6 @@
-// src/api.js
-import { budgets, expenses } from './mocData';
+import {  budgets, expenses } from './mocData';
 
-// Simulate API delay
+
 const delay = () => new Promise(resolve => setTimeout(resolve, 800));
 
 export const BudgetService = {

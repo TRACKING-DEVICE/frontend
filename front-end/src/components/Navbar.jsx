@@ -14,7 +14,7 @@ const BookIcon = () => (
 );
 
 // List of routes where navbar should be hidden
-const hideNavbarRoutes = ['/Dashboard', '/expenseform'];
+const hideNavbarRoutes = ['/Dashboard', '/expenseform', '/expenses'];
 const shouldHideNavbar = (pathname) => {
   if (hideNavbarRoutes.includes(pathname)) return true;
   if (pathname.startsWith('/budget/')) return true; // for dynamic route
@@ -25,9 +25,9 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'BudgetDetail', path: '/budget/:id' },
-    { name: 'ExpenseForm', path: '/expenseform' },
-    { name: 'ReportsPage', path: '/reports' },
+    { name: 'ExpensePage', path: '/expenses' },
     { name: 'Dashboard', path: '/Dashboard' },
+    { name: 'ExpenseList', path: '/expenselist'}
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
